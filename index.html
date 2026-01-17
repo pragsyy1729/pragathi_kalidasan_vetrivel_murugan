@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pragathi Kalidasan Vetrivel Murugan | AI/ML Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a24;
+            --bg-card: #16161e;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #484f58;
+            --accent-cyan: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-orange: #d29922;
+            --accent-purple: #a371f7;
+            --accent-pink: #f778ba;
+            --accent-red: #f85149;
+            --border-color: #30363d;
+            --glow-cyan: rgba(88, 166, 255, 0.4);
+            --glow-green: rgba(63, 185, 80, 0.4);
+            --glow-purple: rgba(163, 113, 247, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Scanline overlay effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.03) 0px,
+                rgba(0, 0, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 9999;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--accent-purple);
+            color: var(--bg-primary);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        .nav-logo::before {
+            content: '> ';
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: './';
+            color: var(--accent-orange);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(88, 166, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(163, 113, 247, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Grid background */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(48, 54, 61, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(48, 54, 61, 0.3) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .terminal-window {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .terminal-header {
+            background: var(--bg-tertiary);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: var(--accent-red); }
+        .terminal-dot.yellow { background: var(--accent-orange); }
+        .terminal-dot.green { background: var(--accent-green); }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .terminal-body {
+            padding: 2rem;
+            font-size: 1rem;
+        }
+
+        .terminal-line {
+            margin-bottom: 0.75rem;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .terminal-line:nth-child(1) { animation-delay: 0.2s; }
+        .terminal-line:nth-child(2) { animation-delay: 0.4s; }
+        .terminal-line:nth-child(3) { animation-delay: 0.6s; }
+        .terminal-line:nth-child(4) { animation-delay: 0.8s; }
+        .terminal-line:nth-child(5) { animation-delay: 1s; }
+        .terminal-line:nth-child(6) { animation-delay: 1.2s; }
+        .terminal-line:nth-child(7) { animation-delay: 1.4s; }
+        .terminal-line:nth-child(8) { animation-delay: 1.6s; }
+        .terminal-line:nth-child(9) { animation-delay: 1.8s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .prompt {
+            color: var(--accent-green);
+        }
+
+        .command {
+            color: var(--accent-cyan);
+        }
+
+        .string {
+            color: var(--accent-orange);
+        }
+
+        .keyword {
+            color: var(--accent-purple);
+        }
+
+        .comment {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .function {
+            color: var(--accent-pink);
+        }
+
+        .hero-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-title {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background: var(--accent-green);
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Section styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-color), transparent);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--glow-cyan);
+        }
+
+        .skill-category h4 {
+            color: var(--accent-green);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category h4::before {
+            content: '//';
+            color: var(--text-muted);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+        }
+
+        .project-category {
+            margin-bottom: 4rem;
+        }
+
+        .project-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .category-title.end-to-end {
+            color: var(--accent-cyan);
+        }
+
+        .category-title.pet {
+            color: var(--accent-purple);
+        }
+
+        .category-count {
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 40px rgba(88, 166, 255, 0.15);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-header {
+            padding: 1.5rem 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .project-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .project-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .project-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .project-body {
+            padding: 1.25rem 1.5rem 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            font-size: 0.7rem;
+            color: var(--accent-orange);
+            background: rgba(210, 153, 34, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-terminal {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--glow-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .footer-code {
+            color: var(--accent-green);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-name {
+                font-size: 1.8rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .terminal-body {
+                font-size: 0.85rem;
+                padding: 1.25rem;
+            }
+        }
+
+        /* Floating ASCII decoration */
+        .ascii-decoration {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            color: var(--border-color);
+            font-size: 0.6rem;
+            line-height: 1;
+            opacity: 0.3;
+            pointer-events: none;
+            white-space: pre;
+        }
+
+        /* Glitch effect for hover */
+        .glitch:hover {
+            animation: glitch 0.3s ease;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">pragathi</div>
+        <ul class="nav-links">
+            <li><a href="#about">about</a></li>
+            <li><a href="#projects">projects</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="grid-bg"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">pragathi@portfolio ~ </span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> <span class="command">whoami</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="hero-name">Pragathi Kalidasan Vetrivel Murugan</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> <span class="command">cat</span> <span class="string">./role.txt</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="hero-title">Associate Data Scientist @ <span style="color: var(--accent-pink);">Societe Generale</span> · 2 Years</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> <span class="command">cat</span> <span class="string">./expertise.txt</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="hero-title" style="font-size: 1rem;">AI/ML Engineer · LLM Specialist · Full-Stack Builder</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> <span class="command">echo</span> <span class="string">"$SKILLS"</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="comment"># Building full-stack AI applications from scratch</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="comment"># Training LLMs & diving deep into transformer architectures</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="comment"># Crafting ML models from first principles</span><span class="cursor"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-header">
+            <span class="section-number">01.</span>
+            <h2 class="section-title">about()</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    <span class="keyword">const</span> <span class="function">passion</span> = <span class="string">"building intelligent systems"</span>;
+                </p>
+                <p>
+                    Currently working as an <span style="color: var(--accent-cyan);">Associate Data Scientist</span> at
+                    <span style="color: var(--accent-pink);">Societe Generale Global Solution Centre</span> with
+                    <span style="color: var(--accent-green);">2 years of experience</span> building data-driven solutions
+                    for the financial services industry.
+                </p>
+                <p>
+                    I'm an engineer who thrives at the intersection of AI research and production systems.
+                    I don't just use APIs—I understand what's happening under the hood. From implementing
+                    tokenizers from scratch to building full-stack applications with LLM-powered backends,
+                    I bridge the gap between cutting-edge ML research and real-world applications.
+                </p>
+                <p>
+                    My approach: <span style="color: var(--accent-cyan);">understand deeply</span>, <span style="color: var(--accent-purple);">build rapidly</span>, <span style="color: var(--accent-green);">ship reliably</span>.
+                </p>
+                <p>
+                    Whether it's training models on GPUs, visualizing neural network internals in 3D,
+                    or architecting multi-agent LLM systems—I love turning complex ideas into working code.
+                </p>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h4>ML/AI Frameworks</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">HuggingFace</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">FAISS</span>
+                        <span class="skill-tag">scikit-learn</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>LLM & NLP</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Transformers</span>
+                        <span class="skill-tag">GPT Fine-tuning</span>
+                        <span class="skill-tag">RAG Systems</span>
+                        <span class="skill-tag">Tokenization</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Full-Stack</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Three.js</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Tools & Infra</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Gradio</span>
+                        <span class="skill-tag">Streamlit</span>
+                        <span class="skill-tag">HF Spaces</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <div class="section-header">
+            <span class="section-number">02.</span>
+            <h2 class="section-title">projects.map()</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <!-- End-to-End Projects -->
+        <div class="project-category">
+            <div class="category-header">
+                <span class="category-icon">🚀</span>
+                <h3 class="category-title end-to-end">// End-to-End Projects</h3>
+                <span class="category-count">4 projects</span>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🧠</div>
+                        <div class="project-links">
+                            <a href="https://github.com/pragsyy1729/now_you_see_me_backend" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Now You See Me</h3>
+                        <p class="project-description">
+                            Interactive 3D visualization of ResNet50 neural network. Upload images and watch data flow
+                            through layers with real-time Grad-CAM heatmaps and particle animations.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">Next.js 14</span>
+                            <span class="tech-tag">Three.js</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Grad-CAM</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">📚</div>
+                        <div class="project-links">
+                            <a href="https://github.com/pragsyy1729/Adapta-Learn-Final" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">AdaptaLearn</h3>
+                        <p class="project-description">
+                            AI-powered adaptive learning platform with multi-agent architecture. Features skill gap analysis,
+                            RAG-based recommendations, gamification, and personalized learning paths.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">FAISS</span>
+                            <span class="tech-tag">Groq</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Multi-Agent</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🔤</div>
+                        <div class="project-links">
+                            <a href="https://github.com/saipragathi0912/TSAI-Assignment-11" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Tamil BPE Tokenizer</h3>
+                        <p class="project-description">
+                            Custom Byte Pair Encoding tokenizer built from scratch for Tamil language.
+                            5,504 vocabulary tokens with 4.45x compression. Zero external dependencies.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Pure Python</span>
+                            <span class="tech-tag">BPE</span>
+                            <span class="tech-tag">Unicode</span>
+                            <span class="tech-tag">Gradio</span>
+                            <span class="tech-tag">NLP</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🎭</div>
+                        <div class="project-links">
+                            <a href="https://github.com/pragsyy1729/decoder_from_scratch" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Decoder Shakespeare</h3>
+                        <p class="project-description">
+                            GPT-2 fine-tuned on Shakespeare's complete works. Interactive generation with
+                            real-time token probability visualization. Deployed on HuggingFace Spaces.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GPT-2</span>
+                            <span class="tech-tag">HuggingFace</span>
+                            <span class="tech-tag">Fine-tuning</span>
+                            <span class="tech-tag">Gradio</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- Pet Projects -->
+        <div class="project-category">
+            <div class="category-header">
+                <span class="category-icon">🧪</span>
+                <h3 class="category-title pet">// Pet Projects & Experiments</h3>
+                <span class="category-count">6 projects</span>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🧬</div>
+                        <div class="project-links">
+                            <a href="https://github.com/saipragathi0912/HMMER" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">HMMER</h3>
+                        <p class="project-description">
+                            Hidden Markov Model for bioinformatics sequence alignment. Implements Baum-Welch
+                            learning and Viterbi decoding for DNA/protein analysis.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HMM</span>
+                            <span class="tech-tag">Baum-Welch</span>
+                            <span class="tech-tag">Viterbi</span>
+                            <span class="tech-tag">NumPy</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">📈</div>
+                        <div class="project-links">
+                            <a href="https://github.com/saipragathi0912/Option-Pricing-using-Reinforcement-Learning" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Options Pricing RL</h3>
+                        <p class="project-description">
+                            Deep Q-Networks and Double DQN for financial derivatives pricing. Custom trading
+                            environment with Black-Scholes framework integration.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">DQN</span>
+                            <span class="tech-tag">QuantLib</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">RL</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🖼️</div>
+                        <div class="project-links">
+                            <a href="https://github.com/saipragathi0912/TSAI-Assignment-9" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">ResNet50 from Scratch</h3>
+                        <p class="project-description">
+                            Complete ResNet50 implementation with SE blocks, stochastic depth, and
+                            ResNet-D modifications for ImageNet classification.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">SE-Blocks</span>
+                            <span class="tech-tag">ImageNet</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">📝</div>
+                        <div class="project-links">
+                            <a href="https://github.com/saipragathi0912/Text-Classification-using-Expectation-Maximization" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">EM Text Classification</h3>
+                        <p class="project-description">
+                            Semi-supervised learning with custom EM algorithm implementation.
+                            Combines labeled and unlabeled data for improved classification.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">EM Algorithm</span>
+                            <span class="tech-tag">Naive Bayes</span>
+                            <span class="tech-tag">TF-IDF</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🧠</div>
+                        <div class="project-links">
+                            <a href="https://github.com/saipragathi0912/ADHD_analysis" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">ADHD EEG Analysis</h3>
+                        <p class="project-description">
+                            ML classification of ADHD from 19-channel EEG signals. Multiple algorithms
+                            compared with proper cross-validation and ROC analysis.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">MNE</span>
+                            <span class="tech-tag">Signal Processing</span>
+                            <span class="tech-tag">SVM</span>
+                            <span class="tech-tag">PCA</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">💳</div>
+                        <div class="project-links">
+                            <a href="https://github.com/pragsyy1729/Credit-Card-Segmentation" class="project-link" target="_blank" title="GitHub">⌘</a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Customer Segmentation</h3>
+                        <p class="project-description">
+                            Comprehensive clustering analysis comparing K-Means, GMM, DBSCAN, and
+                            Hierarchical clustering for credit card customer segmentation.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">K-Means</span>
+                            <span class="tech-tag">GMM</span>
+                            <span class="tech-tag">DBSCAN</span>
+                            <span class="tech-tag">scikit-learn</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="section-header">
+            <span class="section-number">03.</span>
+            <h2 class="section-title">connect()</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="contact-terminal">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">contact.sh</span>
+                </div>
+                <div class="terminal-body" style="text-align: left;">
+                    <div class="terminal-line" style="opacity: 1;">
+                        <span class="prompt">$</span> <span class="command">cat</span> <span class="string">./message.txt</span>
+                    </div>
+                    <div class="terminal-line" style="opacity: 1;">
+                        <br>
+                        I'm always excited to discuss AI/ML projects,<br>
+                        collaborate on interesting problems, or explore<br>
+                        new opportunities. Let's build something cool.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-links">
+            <a href="https://github.com/pragsyy1729" class="contact-link" target="_blank">
+                <span>⌘</span> GitHub
+            </a>
+            <a href="https://linkedin.com/in/pragathivetrivelmurugan" class="contact-link" target="_blank">
+                <span>◈</span> LinkedIn
+            </a>
+            <a href="mailto:pragathi.v@example.com" class="contact-link">
+                <span>✉</span> Email
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p><span class="footer-code">console.log(</span>"Built with passion & caffeine"<span class="footer-code">)</span></p>
+        <p style="margin-top: 0.5rem;">© 2026 Pragathi Kalidasan Vetrivel Murugan</p>
+    </footer>
+
+    <div class="ascii-decoration">
+    ╔═══════════════╗
+    ║  < / >        ║
+    ║   CODE IS     ║
+    ║   POETRY      ║
+    ╚═══════════════╝
+    </div>
+
+    <script>
+        // Smooth reveal on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add stagger delay to project cards
+        document.querySelectorAll('.projects-grid').forEach(grid => {
+            grid.querySelectorAll('.project-card').forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // Typing effect for terminal (optional enhancement)
+        const cursor = document.querySelector('.cursor');
+        if (cursor) {
+            setInterval(() => {
+                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+            }, 530);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh repo view:*)",
+      "Bash(xargs:*)",
+      "Bash(curl -s https://raw.githubusercontent.com/saipragathi0912/JPMC_Quant_Research_Job_Simulation/task_1/assignment_1.ipynb)",
+      "Bash(curl -s https://raw.githubusercontent.com/saipragathi0912/Long-term-stock-prediction-using-Deep-Learning/main/DL_package_modeling.ipynb)",
+      "Bash(curl -s https://raw.githubusercontent.com/saipragathi0912/Option-Pricing-using-Reinforcement-Learning/main/Final_Option_Pricing_using_Reinforcement_Learning_Implementation.ipynb)",
+      "Bash(curl:*)"
+    ]
+  }
+}
